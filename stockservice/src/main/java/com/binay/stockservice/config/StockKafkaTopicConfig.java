@@ -1,0 +1,21 @@
+package com.binay.stockservice.config;
+
+import lombok.*;
+import org.apache.kafka.clients.admin.*;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.*;
+import org.springframework.kafka.config.*;
+
+@RequiredArgsConstructor
+@Configuration
+public class StockKafkaTopicConfig {
+    @Value("${spring.kafka.producer.topic.name}")
+    private String topicName;
+
+    public NewTopic newTopic() {
+        return TopicBuilder
+                .name(topicName)
+                .partitions(2) // 1 for sms and 1 for email
+                .build();
+    }
+}

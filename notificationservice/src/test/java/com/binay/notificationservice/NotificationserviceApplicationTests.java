@@ -1,10 +1,10 @@
-package com.binay.emailservice;
+package com.binay.notificationservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EmailserviceApplicationTests {
+class NotificationserviceApplicationTests {
 
 	@Test
 	void contextLoads() {

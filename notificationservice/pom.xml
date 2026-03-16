@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.binay</groupId>
-	<artifactId>emailservice</artifactId>
+	<artifactId>notificationservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>emailservice</name>
-	<description>Demo project for Spring Boot and email service</description>
+	<name>notificationservice</name>
+	<description>Demo project for Spring Boot and notification service</description>
 	<url/>
 	<licenses>
 		<license/>

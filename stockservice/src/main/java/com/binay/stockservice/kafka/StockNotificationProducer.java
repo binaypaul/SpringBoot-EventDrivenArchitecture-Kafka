@@ -1,4 +1,4 @@
-package com.binay.orderservice.kafka;
+package com.binay.stockservice.kafka;
 
 import com.binay.basedomains.dto.*;
 import lombok.*;
@@ -10,23 +10,29 @@ import org.springframework.messaging.*;
 import org.springframework.messaging.support.*;
 import org.springframework.stereotype.*;
 
-@Slf4j
 @RequiredArgsConstructor
+@Slf4j
 @Service
-public class OrderProducer {
+public class StockNotificationProducer {
+
     private final NewTopic topic;
+
     private final KafkaTemplate<String, OrderEvent> kafkaTemplate;
 
-    public void sendMessage(OrderEvent orderEvent) {
-        log.info("sendMessage - Order Event => {}", orderEvent.toString());
+    public void produceStockNotification(OrderEvent orderEvent) {
+        log.info("produceStockNotification - Order Event => {}", orderEvent.toString());
 
-        //create message
-        Message<OrderEvent> orderMessage = MessageBuilder
+        orderEvent.setMessage("Order placed!");
+        orderEvent.setStatus(OrderStatus.PLACED);
+
+        //create sms notification message
+        Message<OrderEvent> notificationMessage = MessageBuilder
                 .withPayload(orderEvent)
                 .setHeader(KafkaHeaders.TOPIC, topic.name())
                 .build();
 
-        kafkaTemplate.send(orderMessage);
-        log.info("sendMessage - Order Event sent => {}", orderEvent.toString());
+        kafkaTemplate.send(notificationMessage);
+
+        log.info("produceStockNotification - Order Event sent => {}", orderEvent.toString());
     }
 }

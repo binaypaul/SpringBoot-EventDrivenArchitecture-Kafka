@@ -4,5 +4,5 @@ EventDrivenArchitecture for Spring Boot Microservices Application with Kafka
 
 * Order service produces order with status "CREATED" and sends to "order-topic" with 1 partition.
 * Stock service with consumer group name "stock" consumes the event in "order-topic" (TODO: updates stock in db).
-* Stock service then produces event for Notification service in topic "stock-topic" in 2 partitions: 1 each for sms with key "SMS" and email with key "EMAIL".
-* Notification service with consumer group name "sms" and "email" consumes the event in partitions with key "SMS" and "EMAIL" respectively.
+* Stock service then produces event for Notification service in topic "stock-topic" in 2 partitions (By mistake same message is sent to both partitions).
+* Notification service with consumer group name "notification" consumes the event from both partitions, have added the set (ideally from db) logic to handle mistake of same message in both partitions.

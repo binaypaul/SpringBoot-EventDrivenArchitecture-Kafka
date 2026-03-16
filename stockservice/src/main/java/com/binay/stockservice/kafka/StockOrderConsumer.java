@@ -10,15 +10,19 @@ import org.springframework.stereotype.*;
 @RequiredArgsConstructor
 @Service
 public class StockOrderConsumer {
+    private final StockNotificationProducer snProducer;
 
     @KafkaListener(
             topics = "${spring.kafka.consumer.topic.name}",
             groupId = "${spring.kafka.consumer.group-id}"
     )
     public String consumeOrder(OrderEvent orderEvent) {
-        log.info(String.format("Order received in stock service => %s", orderEvent.toString()));
+        log.info("Order received in stock service => {}", orderEvent.toString());
 
         // update order stock in database.
+
+        // produce stock notification
+        snProducer.produceStockNotification(orderEvent);
 
         return String.format("Stock updated successfully! Order ID => %s", orderEvent.getOrder().getOrderId());
     }

@@ -10,12 +10,13 @@ import org.springframework.kafka.config.*;
 @Configuration
 public class StockKafkaTopicConfig {
     @Value("${spring.kafka.producer.topic.name}")
-    private String topicName;
+    private String producerTopicName;
 
+    @Bean
     public NewTopic newTopic() {
         return TopicBuilder
-                .name(topicName)
-                .partitions(2) // 1 for sms and 1 for email
+                .name(producerTopicName)
+                .partitions(2) // 1 for sms with key "SMS" and 1 for email with key "EMAIL"
                 .build();
     }
 }

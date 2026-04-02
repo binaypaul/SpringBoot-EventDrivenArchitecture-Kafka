@@ -9,6 +9,7 @@ import org.springframework.kafka.support.*;
 import org.springframework.messaging.*;
 import org.springframework.messaging.support.*;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -17,6 +18,7 @@ public class OrderProducer {
     private final NewTopic topic;
     private final KafkaTemplate<String, OrderEvent> kafkaTemplate;
 
+    @Transactional
     public void sendMessage(OrderEvent orderEvent) {
         log.info("sendMessage - Order Event => {}", orderEvent.toString());
 

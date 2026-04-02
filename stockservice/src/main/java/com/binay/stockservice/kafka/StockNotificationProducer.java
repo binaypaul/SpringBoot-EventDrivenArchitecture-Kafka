@@ -9,6 +9,7 @@ import org.springframework.kafka.support.*;
 import org.springframework.messaging.*;
 import org.springframework.messaging.support.*;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -19,6 +20,7 @@ public class StockNotificationProducer {
 
     private final KafkaTemplate<String, OrderEvent> kafkaTemplate;
 
+    @Transactional
     public void produceStockNotification(OrderEvent orderEvent) {
         log.info("produceStockNotification - Order Event => {}", orderEvent.toString());
 

@@ -20,7 +20,6 @@ public class StockNotificationProducer {
 
     private final KafkaTemplate<String, OrderEvent> kafkaTemplate;
 
-    @Transactional
     public void produceStockNotification(OrderEvent orderEvent) {
         log.info("produceStockNotification - Order Event => {}", orderEvent.toString());
 

@@ -16,7 +16,7 @@ public class StockKafkaTopicConfig {
     public NewTopic newTopic() {
         return TopicBuilder
                 .name(producerTopicName)
-                .partitions(2) // 1 for sms with key "SMS" and 1 for email with key "EMAIL"
+                .partitions(2)
                 .build();
     }
 }

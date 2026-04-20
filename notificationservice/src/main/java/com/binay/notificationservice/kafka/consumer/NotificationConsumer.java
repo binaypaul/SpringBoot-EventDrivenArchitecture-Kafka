@@ -23,8 +23,10 @@ public class NotificationConsumer {
             log.info("Duplicate order => {}", orderEvent.getOrder());
         } else {
             set.add(orderEvent.getOrder().getOrderId());
-            new SendNotificationByType(new SmsSendingLogicImpl(orderEvent.getOrder()));
-            new SendNotificationByType(new EmailSendingLogicImpl(orderEvent.getOrder()));
+            SendNotificationByType sms = new SendNotificationByType(new SmsSendingLogicImpl(orderEvent.getOrder()));
+            sms.sendNotification();
+            SendNotificationByType email = new SendNotificationByType(new EmailSendingLogicImpl(orderEvent.getOrder()));
+            email.sendNotification();
             log.info("Notification sent fot order => {}", orderEvent.getOrder());
         }
     }

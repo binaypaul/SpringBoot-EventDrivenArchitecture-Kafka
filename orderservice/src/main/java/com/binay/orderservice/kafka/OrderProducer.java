@@ -18,7 +18,7 @@ public class OrderProducer {
     private final NewTopic topic;
     private final KafkaTemplate<String, OrderEvent> kafkaTemplate;
 
-    @Transactional
+//    @Transactional is also required when we are consuming a message -> CRUD to our database. Basically for database transaction, not for kafka.
     public void sendMessage(OrderEvent orderEvent) {
         log.info("sendMessage - Order Event => {}", orderEvent.toString());
 

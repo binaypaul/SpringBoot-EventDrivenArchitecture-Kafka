@@ -20,7 +20,7 @@ public class StockOrderConsumer {
     public String consumeOrder(OrderEvent orderEvent) {
         log.info("Order received in stock service => {}", orderEvent.toString());
 
-        // update order stock in database. will need @Transactional to implement database transaction.
+        // TODO: update order stock in database. will need @Transactional to implement database transaction.
 
         // produce stock notification
         snProducer.produceStockNotification(orderEvent);

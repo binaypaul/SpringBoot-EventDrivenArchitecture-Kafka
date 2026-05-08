@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class StockOrderConsumer {
     private final StockNotificationProducer snProducer;
 
+    //auto configures "KafkaTransactionManager" if "transaction-id-prefix" is available in properties.
     @KafkaListener(
             topics = "${spring.kafka.consumer.topic.name}",
             groupId = "${spring.kafka.consumer.group-id}"

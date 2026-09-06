@@ -4,7 +4,6 @@ import com.binay.basedomains.dto.*;
 import com.binay.orderservice.kafka.*;
 import java.util.*;
 import lombok.*;
-import org.apache.kafka.common.protocol.types.*;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -13,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 public class OrderController {
     private final OrderProducer orderProducer;
 
-    @PostMapping("/placeorder")
-    public String placeOrder(@RequestBody Order order) {
+    @PostMapping("/createorder")
+    public String createOrder(@RequestBody Order order) {
         order.setOrderId(UUID.randomUUID().toString());
         OrderEvent orderEvent = new OrderEvent("Created order!", OrderStatus.CREATED, order);
         orderProducer.sendMessage(orderEvent);
